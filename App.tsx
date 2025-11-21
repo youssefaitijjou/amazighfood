@@ -35,13 +35,13 @@ const App: React.FC = () => {
   const handleCreateRecipeFromAnalysis = (ingredients: string) => {
     setPrefilledIngredients(ingredients);
     setCurrentView(AppView.RECIPES);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handlePlateClick = (title: string, desc: string) => {
     setPrefilledIngredients(`${title}. ${desc}`);
     setCurrentView(AppView.RECIPES);
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (

@@ -61,7 +61,7 @@ const ChatBot: React.FC<ChatBotProps> = ({ language }) => {
       const modelMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'model',
-        text: result.text || "...",
+        text: result.text || "I'm sorry, I couldn't generate a response. Please try again.",
         timestamp: Date.now()
       };
       setMessages(prev => [...prev, modelMsg]);

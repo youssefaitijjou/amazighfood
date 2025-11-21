@@ -9,6 +9,14 @@ const getAIClient = () => {
   return new GoogleGenAI({ apiKey });
 };
 
+// Helper to strip Markdown code blocks from JSON response
+const cleanJson = (text: string): string => {
+  if (!text) return "{}";
+  // Remove ```json or ``` at start, and ``` at end
+  let cleaned = text.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/\s*```$/, '');
+  return cleaned.trim();
+};
+
 // --- Recipe Generation ---
 
 const recipeSchema: Schema = {
@@ -82,7 +90,7 @@ export const generateRecipe = async (ingredients: string, preferences: string, l
   const text = response.text;
   if (!text) throw new Error("No response from AI");
   
-  return JSON.parse(text) as Recipe;
+  return JSON.parse(cleanJson(text)) as Recipe;
 };
 
 export const generateFoodImage = async (description: string): Promise<string | null> => {
@@ -180,7 +188,7 @@ export const analyzeFoodImage = async (base64Image: string, mimeType: string, la
   const text = response.text;
   if (!text) throw new Error("No response from AI");
 
-  return JSON.parse(text) as FoodAnalysis;
+  return JSON.parse(cleanJson(text)) as FoodAnalysis;
 };
 
 export const analyzeFoodText = async (query: string, language: Language): Promise<FoodAnalysis> => {
@@ -207,7 +215,7 @@ export const analyzeFoodText = async (query: string, language: Language): Promis
   const text = response.text;
   if (!text) throw new Error("No response from AI");
   
-  return JSON.parse(text) as FoodAnalysis;
+  return JSON.parse(cleanJson(text)) as FoodAnalysis;
 };
 
 // --- Chat ---

@@ -76,6 +76,7 @@ const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({ language, initialIngr
       cleanupAudio();
       if (audioCtxRef.current) {
         audioCtxRef.current.close();
+        audioCtxRef.current = null;
       }
     };
   }, []);
@@ -111,7 +112,8 @@ const RecipeGenerator: React.FC<RecipeGeneratorProps> = ({ language, initialIngr
 
   const playAudioData = (base64Data: string) => {
     try {
-      if (!audioCtxRef.current) {
+      // Ensure context exists and is not closed
+      if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
       }
 
