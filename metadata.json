@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Copy of Copy of Copy of Copy of AmazighFood",
+  "description": "An AI-powered culinary companion celebrating Amazigh and global cuisine. Generate recipes, analyze food images for nutritional info, and chat with an expert AI chef.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
